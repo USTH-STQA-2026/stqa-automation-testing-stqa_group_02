@@ -27,7 +27,7 @@ Sử dụng **Playwright + Python** để kiểm thử hệ thống Mượn sác
 | 2   | 2410420| Nguyễn Phú Nam Hải | Thành viên  |
 | 3   | 2410695| Nguyễn Sĩ Nam      | Thành viên  |
 | 4   | 2410905| Đinh Công Thành    | Thành viên  |
-| 5   | 2410189| Nguyễn Sĩ Chúc     | Thành viên  |
+| 5   | 2410189| Nguyễn Sỹ Chúc     | Thành viên  |
 ---
 
 ## 📖 Trước khi bắt đầu — Bối cảnh / Before You Start — Context
