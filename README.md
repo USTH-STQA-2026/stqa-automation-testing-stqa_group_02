@@ -23,11 +23,11 @@ Sử dụng **Playwright + Python** để kiểm thử hệ thống Mượn sác
 
 | #   | MSSV   | Họ và tên          | Vai trò     |
 | --- | ----   | ------------       | ----------- |
-| 1   | 2410869| Ngô Đức Minh Sơn   | Nhóm trưởng |
+| 1   | 2410869| Ngô Đức Minh Sơn   | Thành viên  |
 | 2   | 2410420| Nguyễn Phú Nam Hải | Thành viên  |
 | 3   | 2410695| Nguyễn Sĩ Nam      | Thành viên  |
 | 4   | 2410905| Đinh Công Thành    | Thành viên  |
-| 5   | 2410189| Nguyễn Sỹ Chúc     | Thành viên  |
+| 5   | 2410189| Nguyễn Sỹ Chúc     | Nhóm trưởng |
 ---
 
 ## 📖 Trước khi bắt đầu — Bối cảnh / Before You Start — Context
