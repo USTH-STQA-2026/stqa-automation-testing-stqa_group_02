@@ -1,7 +1,7 @@
 """
 Logout & Language Tests (*Kiểm thử Đăng xuất & Chuyển ngôn ngữ*) — Library Book Borrowing System (*Hệ thống Mượn sách thư viện*)
 
-Students must complete ALL 2 test cases in this file.
+This file contains completed logout and language test cases TC-11 and TC-12.
 (*Sinh viên cần hoàn thành TẤT CẢ 2 test case trong file này.*)
 
 Hints (*Gợi ý*):
@@ -15,19 +15,16 @@ Hints (*Gợi ý*):
     - After switching to EN: text "Logout", "Borrow", "Search", "Library" may appear
       (*Sau chuyển EN: text tiếng Anh có thể xuất hiện*)
 """
-import os
-import time
-import pytest
 from conftest import (
-    enable_flutter_semantics, flutter_fill, flutter_click_button,
-    login, SCREENSHOT_DIR,
+    enable_flutter_semantics, flutter_click_button, wait_for_flutter,
 )
+from ui_helpers import login_as, save_screenshot, semantics_text
 
 
 def test_logout(page, test_config):
     """TC-11: Logout success (*Đăng xuất thành công*)
 
-    🔴 NOT COMPLETED (*CHƯA HOÀN THÀNH*)
+    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
 
     Description (*Mô tả*):
         Log in → click Logout → verify page returns to login screen.
@@ -40,14 +37,23 @@ def test_logout(page, test_config):
         4. Assert: "Đăng nhập" button or Email input exists
            (*Assert: có nút "Đăng nhập" hoặc ô input Email*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    login_as(page, test_config["base_url"])
+    flutter_click_button(page, "Đăng xuất")
+    wait_for_flutter(page, text="Đăng nhập")
+    enable_flutter_semantics(page)
+    save_screenshot(page, "tc11_logout.png")
+
+    sem_text = semantics_text(page)
+    assert "Đăng nhập" in sem_text
+    assert "Email" in sem_text
+    assert "Mật khẩu" in sem_text
+    assert "Đăng xuất" not in sem_text
 
 
 def test_switch_language_to_english(page, test_config):
     """TC-12: Switch language to English (*Chuyển ngôn ngữ sang tiếng Anh*)
 
-    🔴 NOT COMPLETED (*CHƯA HOÀN THÀNH*)
+    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
 
     Description (*Mô tả*):
         Log in → click "EN" button → verify UI switches to English.
@@ -60,5 +66,13 @@ def test_switch_language_to_english(page, test_config):
         4. Get sem_text = " ".join(page.locator("flt-semantics").all_text_contents())
         5. Assert: "Logout" or "Borrow" or "Library" in sem_text
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    login_as(page, test_config["base_url"])
+    flutter_click_button(page, "EN")
+    wait_for_flutter(page, text="Logout")
+    enable_flutter_semantics(page)
+    save_screenshot(page, "tc12_switch_language_to_english.png")
+
+    sem_text = semantics_text(page)
+    assert "Logout" in sem_text
+    assert any(text in sem_text for text in ["Books", "Borrow", "Search", "Library"])
+    assert "Đăng xuất" not in sem_text
