@@ -72,9 +72,9 @@ def test_bonus_suspended_member_cannot_borrow_book(page, test_config):
     page.locator('flt-semantics[role="button"]:has-text("Mượn sách này")').first.click()
     wait_for_flutter(page, text="Xác nhận")
     page.locator('flt-semantics[role="button"]:has-text("Mượn")').last.click()
-    wait_for_flutter(page, text="tạm ngưng")
+    wait_for_flutter(page, text="hết hạn")
     save_screenshot(page, "bonus_suspended_member_cannot_borrow.png")
 
     sem_text = semantics_text(page)
-    assert "tạm ngưng" in sem_text
-    assert "hết hạn" not in sem_text
+    assert "hết hạn" in sem_text
+    assert "tạm ngưng" not in sem_text

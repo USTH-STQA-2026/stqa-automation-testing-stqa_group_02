@@ -33,7 +33,7 @@ from ui_helpers import (
 def test_borrow_book(page, test_config):
     """TC-08: Borrow an available book (*Mượn sách có trạng thái 'Có sẵn'*)
 
-    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
+   
 
     Description (*Mô tả*):
         Log in → find an "Available" book → click "Mượn sách này" → confirm dialog
@@ -78,7 +78,7 @@ def test_borrow_book(page, test_config):
 def test_view_borrowed_books(page, test_config):
     """TC-09: View borrowed books list (*Xem danh sách sách đang mượn — tab Mượn / Trả*)
 
-    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
+    
 
     Description (*Mô tả*):
         Log in → switch to "Mượn / Trả" tab → verify borrowed books are shown.
@@ -103,7 +103,7 @@ def test_view_borrowed_books(page, test_config):
 def test_return_book(page, test_config):
     """TC-10: Return a borrowed book (*Trả sách đang mượn*)
 
-    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
+    
 
     Description (*Mô tả*):
         Log in → go to "Mượn / Trả" tab → click "Trả sách" → verify book is returned.

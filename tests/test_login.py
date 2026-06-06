@@ -18,7 +18,6 @@ from ui_helpers import MEMBER_EMAIL, semantics_text, save_screenshot
 def test_login_success(page, test_config):
     """TC-01: Login success with valid credentials (*Đăng nhập thành công với thông tin hợp lệ*)
 
-    ✅ COMPLETED — Use as a reference example.
     (*ĐÃ HOÀN THÀNH — Dùng làm ví dụ tham khảo.*)
 
     📖 RIPR Model (Textbook Ch.2 — Reachability → Infection → Propagation → Revealability):
@@ -51,8 +50,8 @@ def test_login_success(page, test_config):
 def test_login_fail_wrong_password(page, test_config):
     """TC-02: Login fail – wrong password (*Đăng nhập thất bại – sai mật khẩu*)
 
-    ✅ COMPLETED.
-    (*ĐÃ HOÀN THÀNH.*)
+
+
 
     Description (*Mô tả*):
         Enter correct email but wrong password → system stays on login page
@@ -104,9 +103,6 @@ def test_login_fail_wrong_password(page, test_config):
 
 def test_login_fail_empty_fields(page, test_config):
     """TC-03: Login fail – empty fields (*Đăng nhập thất bại – để trống các trường*)
-
-    ✅ COMPLETED.
-    (*ĐÃ HOÀN THÀNH.*)
 
     Description (*Mô tả*):
         Leave all fields empty, click Login → system stays on login page.

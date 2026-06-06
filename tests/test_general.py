@@ -24,7 +24,6 @@ from ui_helpers import login_as, save_screenshot, semantics_text
 def test_logout(page, test_config):
     """TC-11: Logout success (*Đăng xuất thành công*)
 
-    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
 
     Description (*Mô tả*):
         Log in → click Logout → verify page returns to login screen.
@@ -53,7 +52,6 @@ def test_logout(page, test_config):
 def test_switch_language_to_english(page, test_config):
     """TC-12: Switch language to English (*Chuyển ngôn ngữ sang tiếng Anh*)
 
-    ✅ COMPLETED (*ĐÃ HOÀN THÀNH*)
 
     Description (*Mô tả*):
         Log in → click "EN" button → verify UI switches to English.
@@ -68,11 +66,11 @@ def test_switch_language_to_english(page, test_config):
     """
     login_as(page, test_config["base_url"])
     flutter_click_button(page, "EN")
-    wait_for_flutter(page, text="Logout")
+    wait_for_flutter(page, text="Sign out")
     enable_flutter_semantics(page)
     save_screenshot(page, "tc12_switch_language_to_english.png")
 
     sem_text = semantics_text(page)
-    assert "Logout" in sem_text
+    assert "Sign out" in sem_text
     assert any(text in sem_text for text in ["Books", "Borrow", "Search", "Library"])
     assert "Đăng xuất" not in sem_text
