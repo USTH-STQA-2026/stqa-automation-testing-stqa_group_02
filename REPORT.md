@@ -36,3 +36,4 @@ business context.
 
 The group used Codex to draft and review Playwright/pytest automation code,
 then aligned assertions with the SRS and the provided seed data.
+#
