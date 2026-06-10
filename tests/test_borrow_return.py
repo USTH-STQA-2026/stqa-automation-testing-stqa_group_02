@@ -1,7 +1,7 @@
 """
 Borrow & Return Tests (*Kiểm thử Mượn & Trả sách*) — Library Book Borrowing System (*Hệ thống Mượn sách thư viện*)
 
-Students must complete ALL 3 test cases in this file.
+This file contains completed borrow and return test cases TC-08 to TC-10.
 (*Sinh viên cần hoàn thành TẤT CẢ 3 test case trong file này.*)
 
 Hints (*Gợi ý*):
@@ -16,19 +16,24 @@ Hints (*Gợi ý*):
     - Return button: 'flt-semantics[role="button"]:has-text("Trả sách")'
       (*Nút trả*)
 """
-import os
-import time
-import pytest
 from conftest import (
-    enable_flutter_semantics, flutter_fill, flutter_click_button,
-    login, SCREENSHOT_DIR,
+    flutter_fill, wait_for_flutter,
+)
+from ui_helpers import (
+    BORROW_MEMBER_EMAIL,
+    BORROW_MEMBER_PASSWORD,
+    click_semantics_button,
+    click_semantics_tab,
+    login_as,
+    save_screenshot,
+    semantics_text,
 )
 
 
 def test_borrow_book(page, test_config):
     """TC-08: Borrow an available book (*Mượn sách có trạng thái 'Có sẵn'*)
 
-    🔴 NOT COMPLETED (*CHƯA HOÀN THÀNH*)
+   
 
     Description (*Mô tả*):
         Log in → find an "Available" book → click "Mượn sách này" → confirm dialog
@@ -49,14 +54,31 @@ def test_borrow_book(page, test_config):
         6. Assert: "Đang mượn" or "thành công" appears
            (*Assert: "Đang mượn" hoặc "thành công" xuất hiện*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    login_as(
+        page,
+        test_config["base_url"],
+        email=BORROW_MEMBER_EMAIL,
+        password=BORROW_MEMBER_PASSWORD,
+    )
+    flutter_fill(page, "Tìm kiếm theo tên sách hoặc tác giả...", "Lập trình Flutter cơ bản")
+    wait_for_flutter(page, text="Lập trình Flutter cơ bản")
+    wait_for_flutter(page, text="Có sẵn")
+    click_semantics_button(page, "Mượn sách này")
+    wait_for_flutter(page, text="Xác nhận")
+    page.locator('flt-semantics[role="button"]:has-text("Mượn")').last.click()
+    wait_for_flutter(page, text="thành công")
+    save_screenshot(page, "tc08_borrow_book.png")
+
+    sem_text = semantics_text(page)
+    assert "Mượn sách thành công" in sem_text or "thành công" in sem_text
+    assert "Lập trình Flutter cơ bản" in sem_text
+    assert "Đang mượn" in sem_text
 
 
 def test_view_borrowed_books(page, test_config):
     """TC-09: View borrowed books list (*Xem danh sách sách đang mượn — tab Mượn / Trả*)
 
-    🔴 NOT COMPLETED (*CHƯA HOÀN THÀNH*)
+    
 
     Description (*Mô tả*):
         Log in → switch to "Mượn / Trả" tab → verify borrowed books are shown.
@@ -67,14 +89,21 @@ def test_view_borrowed_books(page, test_config):
         - Verify: books with "Đang mượn" in aria-label, or "Trả sách" button exists
           (*Kiểm tra: có sách với aria-label chứa "Đang mượn" hoặc có nút "Trả sách"*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    login_as(page, test_config["base_url"])
+    click_semantics_tab(page, "Mượn / Trả")
+    wait_for_flutter(page, text="Kiểm thử phần mềm nhập môn")
+    save_screenshot(page, "tc09_view_borrowed_books.png")
+
+    sem_text = semantics_text(page)
+    assert "Kiểm thử phần mềm nhập môn" in sem_text
+    assert "Đang mượn" in sem_text
+    assert "Trả sách" in sem_text
 
 
 def test_return_book(page, test_config):
     """TC-10: Return a borrowed book (*Trả sách đang mượn*)
 
-    🔴 NOT COMPLETED (*CHƯA HOÀN THÀNH*)
+    
 
     Description (*Mô tả*):
         Log in → go to "Mượn / Trả" tab → click "Trả sách" → verify book is returned.
@@ -87,5 +116,13 @@ def test_return_book(page, test_config):
         - Click and verify status change or success message
           (*Click và kiểm tra sách chuyển trạng thái hoặc có thông báo thành công*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    login_as(page, test_config["base_url"])
+    click_semantics_tab(page, "Mượn / Trả")
+    wait_for_flutter(page, text="Kiểm thử phần mềm nhập môn")
+    click_semantics_button(page, "Trả sách")
+    wait_for_flutter(page, text="thành công")
+    save_screenshot(page, "tc10_return_book.png")
+
+    sem_text = semantics_text(page)
+    assert "Trả sách thành công" in sem_text or "thành công" in sem_text
+    assert "Kiểm thử phần mềm nhập môn" in sem_text

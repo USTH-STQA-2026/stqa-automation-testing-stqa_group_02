@@ -5,21 +5,19 @@ Login Tests (*Kiểm thử Đăng nhập*) — Library Book Borrowing System (*H
    - RIPR Model (Ch.2): See [R], [I], [P], [R✓] comments in TC-01
    - Data-Driven Testing / @parametrize (Ch.3 §3.3.2): See hint in TC-02/TC-03
 
-This file contains 1 completed example (TC-01).
-Students must complete TC-02 and TC-03.
+This file contains completed login test cases TC-01, TC-02, and TC-03.
 
 (*File này chứa 1 ví dụ mẫu (TC-01) đã hoàn chỉnh.
 Sinh viên cần hoàn thành TC-02 và TC-03.*)
 """
 import os
-import pytest
 from conftest import enable_flutter_semantics, flutter_fill, flutter_click_button, wait_for_flutter, SCREENSHOT_DIR
+from ui_helpers import MEMBER_EMAIL, semantics_text, save_screenshot
 
 
 def test_login_success(page, test_config):
     """TC-01: Login success with valid credentials (*Đăng nhập thành công với thông tin hợp lệ*)
 
-    ✅ COMPLETED — Use as a reference example.
     (*ĐÃ HOÀN THÀNH — Dùng làm ví dụ tham khảo.*)
 
     📖 RIPR Model (Textbook Ch.2 — Reachability → Infection → Propagation → Revealability):
@@ -52,8 +50,8 @@ def test_login_success(page, test_config):
 def test_login_fail_wrong_password(page, test_config):
     """TC-02: Login fail – wrong password (*Đăng nhập thất bại – sai mật khẩu*)
 
-    🔴 NOT COMPLETED — Students must implement this test case.
-    (*CHƯA HOÀN THÀNH — Sinh viên cần viết code cho test case này.*)
+
+
 
     Description (*Mô tả*):
         Enter correct email but wrong password → system stays on login page
@@ -89,15 +87,22 @@ def test_login_fail_wrong_password(page, test_config):
         6. Assert: URL still on login page OR error message shown
            (*Assert: URL vẫn ở trang đăng nhập HOẶC có thông báo lỗi*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    page.goto(test_config["base_url"], wait_until="networkidle", timeout=60000)
+    enable_flutter_semantics(page)
+    flutter_fill(page, "Email", MEMBER_EMAIL)
+    flutter_fill(page, "Mật khẩu", "wrongpassword")
+    flutter_click_button(page, "Đăng nhập")
+    wait_for_flutter(page, text="Mật khẩu không đúng")
+    save_screenshot(page, "tc02_login_wrong_password.png")
+
+    sem_text = semantics_text(page)
+    assert "Mật khẩu không đúng" in sem_text
+    assert "Đăng nhập" in sem_text
+    assert "Đăng xuất" not in sem_text
 
 
 def test_login_fail_empty_fields(page, test_config):
     """TC-03: Login fail – empty fields (*Đăng nhập thất bại – để trống các trường*)
-
-    🔴 NOT COMPLETED — Students must implement this test case.
-    (*CHƯA HOÀN THÀNH — Sinh viên cần viết code cho test case này.*)
 
     Description (*Mô tả*):
         Leave all fields empty, click Login → system stays on login page.
@@ -110,5 +115,13 @@ def test_login_fail_empty_fields(page, test_config):
            (*KHÔNG nhập Email/Mật khẩu — click "Đăng nhập" ngay*)
         4. Assert: URL still on login page (*Assert: URL vẫn ở trang đăng nhập*)
     """
-    # TODO: Students implement here (Sinh viên viết code ở đây)
-    pytest.skip("Not implemented — student must complete (Chưa hoàn thành)")
+    page.goto(test_config["base_url"], wait_until="networkidle", timeout=60000)
+    enable_flutter_semantics(page)
+    flutter_click_button(page, "Đăng nhập")
+    wait_for_flutter(page, text="Vui lòng nhập email và mật khẩu")
+    save_screenshot(page, "tc03_login_empty_fields.png")
+
+    sem_text = semantics_text(page)
+    assert "Vui lòng nhập email và mật khẩu" in sem_text
+    assert "Đăng nhập" in sem_text
+    assert "Đăng xuất" not in sem_text
